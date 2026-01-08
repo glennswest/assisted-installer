@@ -17,6 +17,7 @@ import (
 	v1 "github.com/openshift/api/config/v1"
 	v1beta1 "github.com/openshift/api/machine/v1beta1"
 	ops "github.com/openshift/assisted-installer/src/ops"
+	mcfgv1 "github.com/openshift/machine-config-operator/pkg/apis/machineconfiguration.openshift.io/v1"
 	v1alpha10 "github.com/operator-framework/api/pkg/operators/v1alpha1"
 	gomock "go.uber.org/mock/gomock"
 	v10 "k8s.io/api/batch/v1"
@@ -549,6 +550,21 @@ func (m *MockK8SClient) PatchMachineConfigPoolPaused(pause bool, mcpName string)
 func (mr *MockK8SClientMockRecorder) PatchMachineConfigPoolPaused(pause, mcpName any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PatchMachineConfigPoolPaused", reflect.TypeOf((*MockK8SClient)(nil).PatchMachineConfigPoolPaused), pause, mcpName)
+}
+
+// GetMachineConfig mocks base method.
+func (m *MockK8SClient) GetMachineConfig(name string) (*mcfgv1.MachineConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetMachineConfig", name)
+	ret0, _ := ret[0].(*mcfgv1.MachineConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetMachineConfig indicates an expected call of GetMachineConfig.
+func (mr *MockK8SClientMockRecorder) GetMachineConfig(name any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMachineConfig", reflect.TypeOf((*MockK8SClient)(nil).GetMachineConfig), name)
 }
 
 // PatchNamespace mocks base method.

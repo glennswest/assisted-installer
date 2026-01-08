@@ -41,6 +41,7 @@ type Config struct {
 	EnableSkipMcoReboot         bool
 	NotifyNumReboots            bool
 	CoreosImage                 string
+	HighAvailabilityMode        string
 }
 
 func printHelpAndExit(err error) {
@@ -81,6 +82,7 @@ func (c *Config) ProcessArgs(args []string) {
 	flagSet.BoolVar(&c.EnableSkipMcoReboot, "enable-skip-mco-reboot", false, "indicate assisted installer to generate settings to match MCO requirements for skipping reboot after firstboot")
 	flagSet.BoolVar(&c.NotifyNumReboots, "notify-num-reboots", false, "indicate number of reboots should be notified as event")
 	flagSet.StringVar(&c.CoreosImage, "coreos-image", "", "CoreOS image to install to the existing root")
+	flagSet.StringVar(&c.HighAvailabilityMode, "high-availability-mode", "", "high-availability expectations, \"Full\" which represents the behavior in a \"normal\" cluster. Use 'None' for single-node deployment. Leave this value as \"\" for workers as we do not care about HA mode for workers.")
 
 	var installerArgs string
 	flagSet.StringVar(&installerArgs, "installer-args", "", "JSON array of additional coreos-installer arguments")
